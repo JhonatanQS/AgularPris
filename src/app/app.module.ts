@@ -8,21 +8,25 @@ import { LoginComponent } from './login/login.component';
 import { AppRoutes } from './app.routing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
+import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
    declarations: [
       AppComponent,
-      LoginComponent
+      LoginComponent,
+      HomeComponent
    ],
    imports: [
       BrowserModule,
       AppRoutes,
       MaterializeModule,
+      HttpClientModule,
       ReactiveFormsModule
    ],
    providers: [
-       AuthService
+      AuthService
    ],
    bootstrap: [
       AppComponent
