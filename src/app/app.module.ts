@@ -8,8 +8,11 @@ import { LoginComponent } from './login/login.component';
 import { AppRoutes } from './app.routing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
+import { AuthGuard } from './guards/auth.guard';
+import { JwtInterceptor } from './helpers/jwt.interceptor';
+import { ErrorInterceptor } from './helpers/error.interceptor';
 
 
 @NgModule({
@@ -26,7 +29,10 @@ import { HomeComponent } from './home/home.component';
       ReactiveFormsModule
    ],
    providers: [
-      AuthService
+      AuthService,
+      AuthGuard,
+      { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+      { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
    ],
    bootstrap: [
       AppComponent
